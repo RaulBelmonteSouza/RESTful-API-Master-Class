@@ -35,6 +35,8 @@ public class ProdutoDetalhadoDTO {
 		this.ativo = ativo;
 	}
 	
+	public ProdutoDetalhadoDTO() {}
+	
 	public ProdutoEntity toEntity() {
 		return new ProdutoEntity(nome, descricao, preco, quantidadeEstoque, ativo, dataCadastro);
 	}
