@@ -16,10 +16,14 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	public ProdutoDetalhadoDTO criar(ProdutoDetalhadoDTO produto) {
+		System.out.println(produto.toString());
 		ProdutoEntity produtoEntity = produto.toEntity();
+		System.out.println(produtoEntity);
 		produtoEntity.setDataCadastro(LocalDateTime.now());
 		ProdutoEntity produtoSalvo = this.produtoRepository.save(produtoEntity);
+		System.out.println(produtoSalvo);
 		ProdutoDetalhadoDTO produtoSalvoDTO = new ProdutoDetalhadoDTO().toDTO(produtoSalvo);
+		System.out.println(produtoSalvoDTO);
 		return produtoSalvoDTO;
 	}
 }

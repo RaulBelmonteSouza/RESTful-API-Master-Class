@@ -93,6 +93,13 @@ public class ProdutoEntity {
 	public void setDataCadastro(LocalDateTime dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
+
+	@Override
+	public String toString() {
+		return "ProdutoEntity [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco
+				+ ", quantidadeEstoque=" + quantidadeEstoque + ", ativo=" + ativo + ", dataCadastro=" + dataCadastro
+				+ "]";
+	}
 	
 	
 }

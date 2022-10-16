@@ -14,4 +14,22 @@ public class ProdutoDTO {
 		this.descricao = produtoEntity.getDescricao();
 		this.preco = produtoEntity.getPreco();
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+	
+	
 }

@@ -11,7 +11,7 @@ import com.oficina.api.ecommerce.APIEcommerce.DTOs.ProdutoDetalhadoDTO;
 import com.oficina.api.ecommerce.APIEcommerce.service.ProdutoService;
 
 @RestController
-@RequestMapping(name = "produtos")
+@RequestMapping("/produtos")
 public class ProdutoController {
 
 	@Autowired

@@ -42,9 +42,41 @@ public class ProdutoDetalhadoDTO {
 	}
 	
 	public ProdutoDetalhadoDTO toDTO(ProdutoEntity produtoEntity) {
-		return new ProdutoDetalhadoDTO(id, nome, descricao, preco, quantidadeEstoque, ativo, dataCadastro);
+		return new ProdutoDetalhadoDTO(produtoEntity.getId(),
+				produtoEntity.getNome(),
+				produtoEntity.getDescricao(),
+				produtoEntity.getPreco(),
+				produtoEntity.getQuantidadeEstoque(),
+				produtoEntity.getAtivo(),
+				produtoEntity.getDataCadastro());
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public String getQuantidadeEstoque() {
+		return quantidadeEstoque;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public LocalDateTime getDataCadastro() {
+		return dataCadastro;
+	}
 	
 }
