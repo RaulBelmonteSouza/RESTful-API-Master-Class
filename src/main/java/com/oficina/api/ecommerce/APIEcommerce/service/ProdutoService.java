@@ -41,4 +41,19 @@ public class ProdutoService {
 		ProdutoDetalhadoDTO produtoDetalhadoDTO = new ProdutoDetalhadoDTO().toDTO(produto);
 		return produtoDetalhadoDTO;
 	}
+	
+	public void deletar(Long id) {
+		ProdutoEntity produto = produtoRepository.findById(id).get();
+		produtoRepository.delete(produto);
+	}
+	
+	public ProdutoDetalhadoDTO atualizar(ProdutoDetalhadoDTO produtoDetalhadoDTO, Long id) {
+		ProdutoEntity produtoEntity = produtoRepository.findById(id).get();
+		ProdutoEntity produtoParaAtualizar = produtoDetalhadoDTO.toEntity();
+		produtoParaAtualizar.setId(id);
+		produtoParaAtualizar.setDataCadastro(produtoEntity.getDataCadastro());
+		ProdutoEntity produtoAtualizado = produtoRepository.save(produtoParaAtualizar);
+		produtoDetalhadoDTO = new ProdutoDetalhadoDTO().toDTO(produtoAtualizado);
+		return produtoDetalhadoDTO;
+	}
 }

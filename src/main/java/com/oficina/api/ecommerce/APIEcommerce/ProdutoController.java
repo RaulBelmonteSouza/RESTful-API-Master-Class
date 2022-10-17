@@ -1,14 +1,16 @@
 package com.oficina.api.ecommerce.APIEcommerce;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +43,27 @@ public class ProdutoController {
 		try {
 			ProdutoDetalhadoDTO produtoDTO = this.produtoService.buscar(id);
 			return ResponseEntity.ok(produtoDTO);
-		} catch (EntityNotFoundException e) {
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity deletar(@PathVariable("id") Long id) {
+		try {
+			this.produtoService.deletar(id);
+			return ResponseEntity.noContent().build();
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<ProdutoDetalhadoDTO> atualizar(@PathVariable("id") Long id, @RequestBody ProdutoDetalhadoDTO produtoDetalhadoDTO) {
+		try {
+			ProdutoDetalhadoDTO produtoDetalhadoAtualizadoDTO = this.produtoService.atualizar(produtoDetalhadoDTO, id);
+			return ResponseEntity.ok(produtoDetalhadoAtualizadoDTO);
+		} catch (NoSuchElementException e) {
 			return ResponseEntity.notFound().build();
 		}
 	}
