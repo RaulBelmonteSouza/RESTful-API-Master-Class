@@ -1,10 +1,13 @@
 package com.oficina.api.ecommerce.APIEcommerce.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.oficina.api.ecommerce.APIEcommerce.DTOs.ProdutoDTO;
 import com.oficina.api.ecommerce.APIEcommerce.DTOs.ProdutoDetalhadoDTO;
 import com.oficina.api.ecommerce.APIEcommerce.entity.ProdutoEntity;
 import com.oficina.api.ecommerce.APIEcommerce.repository.ProdutoRepository;
@@ -16,14 +19,26 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	public ProdutoDetalhadoDTO criar(ProdutoDetalhadoDTO produto) {
-		System.out.println(produto.toString());
 		ProdutoEntity produtoEntity = produto.toEntity();
-		System.out.println(produtoEntity);
 		produtoEntity.setDataCadastro(LocalDateTime.now());
 		ProdutoEntity produtoSalvo = this.produtoRepository.save(produtoEntity);
-		System.out.println(produtoSalvo);
 		ProdutoDetalhadoDTO produtoSalvoDTO = new ProdutoDetalhadoDTO().toDTO(produtoSalvo);
-		System.out.println(produtoSalvoDTO);
 		return produtoSalvoDTO;
+	}
+	
+	public List<ProdutoDTO> listar() {
+		List<ProdutoEntity> listaDeProdutos = produtoRepository.findAll();
+		List<ProdutoDTO> listaDeProdutosDTO = listaDeProdutos
+			.stream()
+			.map(produto -> new ProdutoDTO(produto))
+			.collect(Collectors.toList());
+		
+		return listaDeProdutosDTO;
+	}
+	
+	public ProdutoDetalhadoDTO buscar(Long id) {
+		ProdutoEntity produto = produtoRepository.findById(id).get();
+		ProdutoDetalhadoDTO produtoDetalhadoDTO = new ProdutoDetalhadoDTO().toDTO(produto);
+		return produtoDetalhadoDTO;
 	}
 }
